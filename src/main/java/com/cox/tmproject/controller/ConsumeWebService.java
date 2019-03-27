@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,6 +21,8 @@ import org.springframework.web.client.RestTemplate;
 
 
 @RestController
+@ComponentScan
+@RequestMapping(value = "/tm")
 public class ConsumeWebService {
    @Autowired
    RestTemplate restTemplate;
@@ -29,7 +32,7 @@ public class ConsumeWebService {
       HttpHeaders headers = new HttpHeaders();
       headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
       HttpEntity <String> entity = new HttpEntity<String>(headers);
-      
+      System.out.println("you are in controller class");
       return restTemplate.exchange("http://localhost:8080/sample/tmapi/v1/hello", HttpMethod.GET, entity, String.class).getBody();
       //return restTemplate.exchange("http://localhost:8080/products", HttpMethod.GET, entity, String.class).getBody();
    
